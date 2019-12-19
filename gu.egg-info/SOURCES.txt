@@ -1,9 +1,0 @@
-README.md
-setup.py
-./scripts/gu
-gu/__init__.py
-gu/__main__.py
-gu.egg-info/PKG-INFO
-gu.egg-info/SOURCES.txt
-gu.egg-info/dependency_links.txt
-gu.egg-info/top_level.txt
