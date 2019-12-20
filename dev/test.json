@@ -1,0 +1,10 @@
+{
+	"__type__": "Configs",
+	"current_user": "a",
+	"users_list": {
+		"a": {
+			"username": "Alex Ye",
+			"email": "alex@example.com"
+		}
+	}
+}

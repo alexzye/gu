@@ -1,6 +1,7 @@
+from gu import gu
 
 def main():
-	print("yes main!")
+	gu.gu() # ga ga
 
 if __name__ == "__main__":
 	# execute only if run as a script
