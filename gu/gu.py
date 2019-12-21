@@ -1,4 +1,5 @@
-import os, json
+import os, json, subprocess
+
 
 CONFIG_FILE_NAME = '.gu_config'
 
@@ -12,6 +13,16 @@ def object_decoder(obj):
         return Configs(obj['current_user'], obj['users_list'])
     return obj
 
+
+def write_configs(c, config_file):
+	config_dict = c.__dict__
+	config_dict['__type__'] = 'Configs'
+	json_string = json.dumps(config_dict)
+
+	with open(config_file, "w+") as f:
+		f.write(json_string)
+
+
 def open_configs():
 	'''open_configs opens and returns a confguration file. creates a new file if one doesnt exist'''
 	try:
@@ -23,19 +34,17 @@ def open_configs():
 		sys.exit(1)
 
 	if not os.path.exists(config_file):
-		# create one
-		c = Configs("", {})
-		config_dict = c.__dict__
-		config_dict['__type__'] = 'Configs'
-		json_string = json.dumps(config_dict)
-
-		with open(config_file, "w+") as f:
-			f.write(json_string)
-
+		write_configs(Configs("", {}))
+		
 	with open(config_file) as json_file:
 		data = json.load(json_file, object_hook=object_decoder)
 
 	return data
+
+def switch_users(configs):
+	output = subprocess.check_output(["git", "config", "--global", "user.name", ])
+	print(output)
+
 
 def gu():
 
@@ -43,6 +52,9 @@ def gu():
 
 	print(configs.current_user)
 	print(configs.users_list)
+
+	switch_users(configs)
+
 
 	# with  as json_file:
 	# with open(config, 'w+') as f:
