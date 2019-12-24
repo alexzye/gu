@@ -1,6 +1,5 @@
 import os, json, subprocess
 
-
 CONFIG_FILE_NAME = '.gu_config'
 
 class Configs:
@@ -12,7 +11,6 @@ def object_decoder(obj):
     if '__type__' in obj and obj['__type__'] == 'Configs':
         return Configs(obj['current_user'], obj['users_list'])
     return obj
-
 
 def write_configs(c, config_file):
 	config_dict = c.__dict__
@@ -30,11 +28,11 @@ def open_configs():
 	except KeyError:
 		config_file = os.path.join(os.path.expanduser('~'), CONFIG_FILE_NAME)
 	except:
-		print("fuk")
+		print("failed to get environ var")
 		sys.exit(1)
 
 	if not os.path.exists(config_file):
-		write_configs(Configs("", {}))
+		write_configs(Configs("", {}), config_file)
 		
 	with open(config_file) as json_file:
 		data = json.load(json_file, object_hook=object_decoder)
@@ -42,31 +40,10 @@ def open_configs():
 	return data
 
 def switch_users(configs):
-	output = subprocess.check_output(["git", "config", "--global", "user.name", ])
+	output = subprocess.check_output(["git", "config", "--global", "user.name"])
 	print(output)
 
-
 def gu():
-
 	configs = open_configs()
-
-	print(configs.current_user)
-	print(configs.users_list)
-
+	
 	switch_users(configs)
-
-
-	# with  as json_file:
-	# with open(config, 'w+') as f:
-		
-
-	# with open(config) as json_file:
-	#     data = json.load(json_file, object_hook=object_decoder)
-	#     # print(json_file)
-	#     # c = json.loads(json_file, object_hook=object_decoder)
-
-	# print("GU!")
-	# print(config)
-	# print(data.current_user)
-	# print(data.users_list)
-	# print(c)
