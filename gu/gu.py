@@ -1,4 +1,4 @@
-import os, json, subprocess
+import os, json, subprocess, sys
 
 CONFIG_FILE_NAME = '.gu_config'
 
@@ -39,11 +39,30 @@ def open_configs():
 
 	return data
 
-def switch_users(configs):
-	output = subprocess.check_output(["git", "config", "--global", "user.name"])
-	print(output)
+def validate_args(args):
+	valid = ['use', 'add']
+	if args.cmd[0] not in valid:
+		print("nope")
+		sys.exit(1)
 
-def gu():
-	configs = open_configs()
+def use_cmd(args, configs):
+	config_set_cmd = ["git", "config"]
+	if args.glob:
+		config_set_cmd.append('--global')
+
+	subprocess.check_output(config_set_cmd + ["user.name", configs.users_list[args.cmd[1:][0]]['username']])
+	subprocess.check_output(config_set_cmd + ["user.email", configs.users_list[args.cmd[1:][0]]['email']])
+
+def dispatch_cmd(args):
+	cmd_map = {
+		'use': use_cmd
+	}
 	
-	switch_users(configs)
+	cmd_map[args.cmd[0]](args, open_configs())
+
+
+def gu(args):
+	validate_args(args)
+	
+	dispatch_cmd(args)
+	# switch_users(configs)
