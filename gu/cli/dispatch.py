@@ -1,4 +1,4 @@
-import sys, subprocess
+import sys, subprocess, json
 
 def use_cmd(g):
 	user = g.args
@@ -24,6 +24,9 @@ def use_cmd(g):
 def list_cmd(g):
 	# can this be done better?
 	print(subprocess.check_output(['git', 'config', '--list']).decode("utf-8").replace("\\n","\n"))
+
+def ls_cmd(g):
+	print(json.dumps(g.data.__dict__, sort_keys=True, indent=4))
 
 def add_cmd(g):
 	alias = input('Alias for user: ')
@@ -52,5 +55,6 @@ def dispatch_cmd(g):
 		'use': use_cmd,
 		'add': add_cmd,
 		'list': list_cmd,
+		'ls': ls_cmd,
 	}
 	cmd_map[g.cmd](g)

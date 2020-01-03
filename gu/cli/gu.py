@@ -47,7 +47,7 @@ class Gu:
 			self.data = json.load(json_file, object_hook=self.object_decoder)
 
 	def validate_args(self):
-		valid = ['use', 'add', 'list']
+		valid = ['use', 'add', 'list', 'ls']
 		if self.cmd not in valid:
 			print("nope")
 			sys.exit(1)

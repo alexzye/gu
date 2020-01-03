@@ -8,7 +8,7 @@
         "work": {
             "username": "Work Alex",
             "email": "work@example.com"
-        },
+        }
     },
     "__type__": "Configs"
 }
