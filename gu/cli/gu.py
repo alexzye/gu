@@ -23,11 +23,10 @@ class Gu:
 			return Configs(obj['current_user'], obj['users_list'])
 		return obj
 
-	def write_configs():
+	def write_configs(self):
 		config_dict = self.data.__dict__
 		config_dict['__type__'] = 'Configs'
-		json_string = json.dumps(config_dict)
-
+		json_string = json.dumps(config_dict, indent=4)
 		with open(self.config_file, "w+") as f:
 			f.write(json_string)
 
@@ -48,7 +47,7 @@ class Gu:
 			self.data = json.load(json_file, object_hook=self.object_decoder)
 
 	def validate_args(self):
-		valid = ['use', 'add']
+		valid = ['use', 'add', 'list']
 		if self.cmd not in valid:
 			print("nope")
 			sys.exit(1)

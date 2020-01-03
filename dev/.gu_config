@@ -1,10 +1,14 @@
 {
-	"__type__": "Configs",
-	"current_user": "alex",
-	"users_list": {
-		"alex": {
-			"username": "Alex Ye",
-			"email": "alex@example.com"
-		}
-	}
+    "current_user": "test_alex",
+    "users_list": {
+        "alex": {
+            "username": "Home Alex",
+            "email": "alex@example.com"
+        },
+        "work": {
+            "username": "Work Alex",
+            "email": "work@example.com"
+        },
+    },
+    "__type__": "Configs"
 }
