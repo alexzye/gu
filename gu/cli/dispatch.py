@@ -33,10 +33,15 @@ def add_cmd(g):
 	username = input('Git username: ')
 	email = input('Git email: ')
 	switch = input('Switch to this user? (Y/N): ')
-	g.data.users_list[alias] = {
-		'username': username,
-		'email': email
-	}
+	
+	if alias in g.data.users_list:
+		print('\nAlias already exists')
+	else:
+		g.data.users_list[alias] = {
+			'username': username,
+			'email': email
+		}
+		g.write_configs()
 
 	if switch.lower() == 'y':
 		g.data.current_user = alias
@@ -47,7 +52,7 @@ def add_cmd(g):
 		subprocess.check_output(config_set_cmd + ['user.name', username])
 		subprocess.check_output(config_set_cmd + ['user.email', email])
 
-	g.write_configs()
+	
 
 def dispatch_cmd(g):
 	# todo: add flag support (i.e. --username user will bypass prompts) 
