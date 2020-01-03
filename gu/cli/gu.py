@@ -4,9 +4,9 @@ from .dispatch import dispatch_cmd
 CONFIG_FILE_NAME = '.gu_config'
 
 class Configs:
-	def __init__(self, current_user, users_list):
+	def __init__(self, current_user, users):
 		self.current_user = current_user
-		self.users_list = users_list
+		self.users = users
 
 class Gu:
 	def __init__(self, parser):
@@ -20,7 +20,7 @@ class Gu:
 	
 	def object_decoder(self, obj):
 		if '__type__' in obj and obj['__type__'] == 'Configs':
-			return Configs(obj['current_user'], obj['users_list'])
+			return Configs(obj['current_user'], obj['users'])
 		return obj
 
 	def write_configs(self):
@@ -47,7 +47,7 @@ class Gu:
 			self.data = json.load(json_file, object_hook=self.object_decoder)
 
 	def validate_args(self):
-		valid = ['use', 'add', 'list', 'ls']
+		valid = ['use', 'add', 'list', 'ls', 'rm']
 		if self.cmd not in valid:
 			print("nope")
 			sys.exit(1)

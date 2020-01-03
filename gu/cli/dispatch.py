@@ -7,7 +7,7 @@ def use_cmd(g):
 		sys.exit(1)
 
 
-	if user[0] not in g.data.users_list:
+	if user[0] not in g.data.users:
 		print('user does not exist. use add.')
 		sys.exit(1)
 
@@ -15,8 +15,8 @@ def use_cmd(g):
 	if g.glob:
 		config_set_cmd.append('--global')
 
-	subprocess.check_output(config_set_cmd + ['user.name', g.data.users_list[user[0]]['username']])
-	subprocess.check_output(config_set_cmd + ['user.email', g.data.users_list[user[0]]['email']])
+	subprocess.check_output(config_set_cmd + ['user.name', g.data.users[user[0]]['username']])
+	subprocess.check_output(config_set_cmd + ['user.email', g.data.users[user[0]]['email']])
 
 	g.data.current_user = user[0]
 	g.write_configs()
@@ -34,10 +34,10 @@ def add_cmd(g):
 	email = input('Git email: ')
 	switch = input('Switch to this user? (Y/N): ')
 	
-	if alias in g.data.users_list:
+	if alias in g.data.users:
 		print('\nAlias already exists')
 	else:
-		g.data.users_list[alias] = {
+		g.data.users[alias] = {
 			'username': username,
 			'email': email
 		}
@@ -52,7 +52,21 @@ def add_cmd(g):
 		subprocess.check_output(config_set_cmd + ['user.name', username])
 		subprocess.check_output(config_set_cmd + ['user.email', email])
 
+
+def del_cmd(g):
+	user = g.args
+	if len(user) == 0 or len(user) > 1:
+		print('del cmd wrong args')
+		sys.exit(1)
 	
+	if user[0] == g.data.current_user:
+		print('\nCannot delete the current user')
+	elif user[0] not in g.data.users:
+		print('\nUser does not exist')
+	else:
+		del g.data.users[user[0]]
+		g.write_configs()
+
 
 def dispatch_cmd(g):
 	# todo: add flag support (i.e. --username user will bypass prompts) 
@@ -61,5 +75,6 @@ def dispatch_cmd(g):
 		'add': add_cmd,
 		'list': list_cmd,
 		'ls': ls_cmd,
+		'rm': del_cmd,
 	}
 	cmd_map[g.cmd](g)

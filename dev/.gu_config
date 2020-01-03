@@ -1,6 +1,6 @@
 {
     "current_user": "alex",
-    "users_list": {
+    "users": {
         "alex": {
             "username": "Home Alex",
             "email": "alex@example.com"
