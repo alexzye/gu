@@ -29,6 +29,14 @@ class Gu:
 		json_string = json.dumps(config_dict, indent=4)
 		with open(self.config_file, "w+") as f:
 			f.write(json_string)
+	
+	def write_new_configs(self):
+		self.data = Configs("", {})
+		config_dict = self.data.__dict__
+		config_dict['__type__'] = 'Configs'
+		json_string = json.dumps(config_dict, indent=4)
+		with open(self.config_file, "w+") as f:
+			f.write(json_string)
 
 	def open_configs(self):
 		'''open_configs opens and returns a confguration file. creates a new file if one doesnt exist'''
@@ -41,10 +49,10 @@ class Gu:
 			sys.exit(1)
 
 		if not os.path.exists(self.config_file):
-			self.write_configs(Configs("", {}), config_file)
-			
-		with open(self.config_file) as json_file:
-			self.data = json.load(json_file, object_hook=self.object_decoder)
+			self.write_new_configs()
+		else:
+			with open(self.config_file) as json_file:
+				self.data = json.load(json_file, object_hook=self.object_decoder)
 
 	def validate_args(self):
 		valid = ['use', 'add', 'list', 'ls', 'rm']

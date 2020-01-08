@@ -41,8 +41,8 @@ def add_cmd(g):
 			'username': username,
 			'email': email
 		}
-		g.write_configs()
 
+	# todo: combine with use user
 	if switch.lower() == 'y':
 		g.data.current_user = alias
 		config_set_cmd = ['git', 'config']
@@ -51,6 +51,8 @@ def add_cmd(g):
 
 		subprocess.check_output(config_set_cmd + ['user.name', username])
 		subprocess.check_output(config_set_cmd + ['user.email', email])
+	g.write_configs()
+
 
 
 def del_cmd(g):
