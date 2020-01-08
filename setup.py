@@ -11,7 +11,7 @@ setuptools.setup(
 	description="git user switcher",
 	long_description=long_description,
 	long_description_content_type="text/markdown",
-	url="https://github.com/azye/gu"
+	url="https://github.com/azye/gu",
 	scripts=['./scripts/gu'],
 	packages=setuptools.find_packages(),
 	python_requires='>=3.6',
