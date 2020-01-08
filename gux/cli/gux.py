@@ -1,14 +1,14 @@
 import os, json, subprocess, sys
 from .dispatch import dispatch_cmd
 
-CONFIG_FILE_NAME = '.gu_config'
+CONFIG_FILE_NAME = '.gux_config'
 
 class Configs:
 	def __init__(self, current_user, users):
 		self.current_user = current_user
 		self.users = users
 
-class Gu:
+class Gux:
 	def __init__(self, parser):
 		args = parser.parse_args()
 		self.parser = parser
@@ -60,5 +60,5 @@ class Gu:
 			print("nope")
 			sys.exit(1)
 
-def gu(parser):
-	dispatch_cmd(Gu(parser))
+def gux(parser):
+	dispatch_cmd(Gux(parser))

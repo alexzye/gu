@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ ! $@ ]]; then
-    python3 -m gu -h
+    python3 -m gux -h
 else
-    python3 -m gu $@
+    python3 -m gux $@
 fi

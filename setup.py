@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-	name="gu",
+	name="gux",
 	version="0.0.1",
 	author="Alex Ye",
 	author_email="alexzye1@gmail.com",
@@ -12,7 +12,7 @@ setuptools.setup(
 	long_description=long_description,
 	long_description_content_type="text/markdown",
 	url="https://github.com/azye/gu",
-	scripts=['./scripts/gu'],
+	scripts=['./scripts/gux'],
 	packages=setuptools.find_packages(),
 	python_requires='>=3.6',
 )
