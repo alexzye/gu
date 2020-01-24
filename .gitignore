@@ -1,6 +1,7 @@
 build
 dist
-gu.egg-info
+gux.egg-info
 .DS_Store
 __pycache__
 .env
+

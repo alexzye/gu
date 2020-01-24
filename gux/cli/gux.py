@@ -57,7 +57,7 @@ class Gux:
 	def validate_args(self):
 		valid = ['use', 'add', 'list', 'ls', 'rm']
 		if self.cmd not in valid:
-			print("nope")
+			print("valid commands are 'use', 'add', 'list', 'ls', 'rm'")
 			sys.exit(1)
 
 def gux(parser):

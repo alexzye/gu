@@ -1,13 +1,9 @@
 {
-    "current_user": "alex",
+    "current_user": "azye",
     "users": {
-        "alex": {
-            "username": "Home Alex",
-            "email": "alex@example.com"
-        },
-        "work": {
-            "username": "Work Alex",
-            "email": "work@example.com"
+        "azye": {
+            "username": "Alex Ye",
+            "email": "alexzye1@gmail.com"
         }
     },
     "__type__": "Configs"
