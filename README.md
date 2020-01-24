@@ -13,9 +13,13 @@ pip3 intall gux
 `gux` has the following commands: 'use', 'add', 'list', 'ls', 'rm'.
 
 `gux use [user]` - Changes the main tracked user used by `gux`
+
 `gux rm [user]`  - Deletes a user from the `gux` registry
+
 `gux add`        - Adds a new user to the `gux` registry
+
 `gux list`       - Lists the current git configurations in a repo
+
 `gux ls`         - Show list of current users registered to gux
 
 ## Development
